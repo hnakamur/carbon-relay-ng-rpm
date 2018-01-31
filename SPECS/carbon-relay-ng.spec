@@ -3,19 +3,12 @@
 
 %define debug_package %{nil}
 
-# NOTE: Follow step in Makefile of carbon-relay-ng to detect additional_commits.
-# Run the following command in the carbon-relay-ng git work directory.
-# git describe --tags --always
-%global additional_commits 11
-%global commit             20ce86599a47875ff635b3ab5ecb8b049fcd7d78
-%global shortcommit        %(echo %{commit} | cut -c 1-7)
-
 Name:	        carbon-relay-ng
 # NOTE: I'm using the same version scheme as carbon-relay-ng in the
 # raintank pacakge repository described at
 # https://github.com/graphite-ng/carbon-relay-ng#installation
 Epoch:          1
-Version:	0.9.3_%{additional_commits}_g%{shortcommit}
+Version:	0.9.4
 Release:	1%{?dist}
 Summary:	Fast carbon relay+aggregator with admin interfaces for making changes online
 
@@ -31,7 +24,8 @@ URL:		https://github.com/graphite-ng/carbon-relay-ng
 # cd src/github.com/graphite-ng
 # git clone https://github.com/graphite-ng/carbon-relay-ng
 # cd carbon-relay-ng
-# git checkout 20ce86599a47875ff635b3ab5ecb8b049fcd7d78
+# git checkout b16fe997a9ab20256553ea879759d60cac556cb9
+# git describe --tags --always # modify Version and Relase on this output
 # cd $GOPATH/..
 # tar cf - carbon-relay-ng | gzip -9 > carbon-relay-ng.tar.gz
 Source0:	carbon-relay-ng.tar.gz
@@ -92,5 +86,8 @@ exit 0
 %systemd_postun
 
 %changelog
+* Wed Jan 31 2018 <hnakamur@gmail.com> - 0.9.4-1
+- 0.9.4 (commit b16fe997a9ab20256553ea879759d60cac556cb9)
+
 * Wed Dec 13 2017 <hnakamur@gmail.com> - 0.9.3_11_g20ce865-1
 - 0.9.3_11_g20ce865-1
